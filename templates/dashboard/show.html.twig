@@ -1,0 +1,42 @@
+{% extends '/base.html.twig' %}
+
+{% block title %}Duck{% endblock %}
+
+{% block body %}
+    <h1>Votre Duck</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ duck.id }}</td>
+            </tr>
+            <tr>
+                <th>Duckname</th>
+                <td>{{ duck.duckname }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ duck.roles ? duck.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ duck.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ duck.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ duck.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+{#    <a href="{{ path('app_dash_board_bis_index') }}">back to list</a>#}
+
+    <a href="{{ path('app_dashboard_edit', {'id': duck.id}) }}"><button>edit</button></a>
+
+{#    {{ include('dash_board_bis/_delete_form.html.twig') }}#}
+{% endblock %}
