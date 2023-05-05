@@ -17,11 +17,11 @@
         <tbody>
         {% for quack in quacks %}
             <tr>
-                <td>{{ quack.id }}</td>
+                <td class="text-amber-600">{{ quack.id }}</td>
                 <td>{{ quack.content }}</td>
                 <td>{{ quack.createdAt ? quack.createdAt|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_quack_show', {'id': quack.id}) }}"><button> Voir le quack </button></a>
+                    <a class="p-2 bg-indigo-400 rounded-full" href="{{ path('app_quack_show', {'id': quack.id}) }}"><button> Voir le quack </button></a>
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <a href="{{ path('app_quack_edit', {'id': quack.id}) }}"><button>Modifier</button></a>
                     {% endif %}
