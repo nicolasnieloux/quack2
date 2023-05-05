@@ -34,7 +34,9 @@
     </table>
 
     <a href="{{ path('app_quack_new') }}"><button>Créer un Quack</button></a>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
     <a href="{{ path('app_logout') }}"><button>Logout</button></a>
+    {% endif %}
     <a href="{{ path('app_register') }}"><button>Créer un compte</button></a>
     <a href="{{ path('app_login') }}"><button>Se logger</button></a>
 {% endblock %}

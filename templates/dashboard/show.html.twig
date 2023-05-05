@@ -37,6 +37,6 @@
 {#    <a href="{{ path('app_dash_board_bis_index') }}">back to list</a>#}
 
     <a href="{{ path('app_dashboard_edit', {'id': duck.id}) }}"><button>edit</button></a>
-
-{#    {{ include('dash_board_bis/_delete_form.html.twig') }}#}
+    <a href="{{ path('app_quack_index') }}"><button>Voir tous les quacks</button></a>
+    <a href="{{ path('app_logout') }}"><button>Logout</button></a>
 {% endblock %}
