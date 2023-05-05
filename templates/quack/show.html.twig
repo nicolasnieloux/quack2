@@ -23,8 +23,9 @@
     </table>
 
     <a href="{{ path('app_quack_index') }}"><button>Retour</button></a>
-
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
     <a href="{{ path('app_quack_edit', {'id': quack.id}) }}"><button>Edit</button></a>
 
     {{ include('quack/_delete_form.html.twig') }}
+    {%  endif %}
 {% endblock %}

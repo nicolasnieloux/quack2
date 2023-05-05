@@ -22,7 +22,9 @@
                 <td>{{ quack.createdAt ? quack.createdAt|date('Y-m-d') : '' }}</td>
                 <td>
                     <a href="{{ path('app_quack_show', {'id': quack.id}) }}"><button> Voir le quack </button></a>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <a href="{{ path('app_quack_edit', {'id': quack.id}) }}"><button>Modifier</button></a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -32,11 +34,12 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_quack_new') }}"><button>Créer un Quack</button></a>
+{{ dump (quacks) }}
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-    <a href="{{ path('app_logout') }}"><button>Logout</button></a>
-    {% endif %}
+    <a href="{{ path('app_quack_new') }}"><button>Créer un Quack</button></a>
+        <a href="{{ path('app_logout') }}"><button>Logout</button></a>
+    {% else %}
     <a href="{{ path('app_register') }}"><button>Créer un compte</button></a>
     <a href="{{ path('app_login') }}"><button>Se logger</button></a>
+    {% endif %}
 {% endblock %}
