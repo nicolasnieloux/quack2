@@ -1,21 +1,74 @@
-{#{% extends 'base.html.twig' %}#}
+{% extends 'base.html.twig' %}
 
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
-
-    {{ form_start(registrationForm) }}
-    {{ form_row(registrationForm.firstname) }}
-    {{ form_row(registrationForm.lastname) }}
-    {{ form_row(registrationForm.email) }}
-    {{ form_row(registrationForm.duckname) }}
-    {{ form_row(registrationForm.plainPassword, {
-        label: 'Password'
+    <div class="flex justify-center">
+    <div class="w-full max-w-md">
+    <div class="mt-8 bg-white rounded-lg shadow-md">
+    <div class="py-8 px-8 rounded-t-lg bg-blue-400">
+        <h1 class="text-white text-2xl font-bold">Register</h1>
+    </div>
+    {{ form_start(registrationForm, {
+        'attr': {
+            'class': 'space-y-4 p-8'
+        }
     }) }}
-    {{ form_row(registrationForm.agreeTerms) }}
+    <div class="space-y-4">
+        {{ form_row(registrationForm.firstname, {
+            'label': 'First Name',
+            'attr': {
+                'class': 'block w-full bg-gray-100 rounded-lg border-transparent focus:border-gray-500 focus:bg-white focus:ring-0'
+            }
+        }) }}
 
-    <button type="submit" class="btn ">Register</button>
+        {{ form_row(registrationForm.lastname, {
+            'label': 'Last Name',
+            'attr': {
+                'class': 'block w-full bg-gray-100 rounded-lg border-transparent focus:border-gray-500 focus:bg-white focus:ring-0'
+            }
+        }) }}
+
+        {{ form_row(registrationForm.email, {
+            'label': 'Email',
+            'attr': {
+                'class': 'block w-full bg-gray-100 rounded-lg border-transparent focus:border-gray-500 focus:bg-white focus:ring-0'
+            }
+        }) }}
+
+        {{ form_row(registrationForm.duckname, {
+            'label': 'Duck Name',
+            'attr': {
+                'class': 'block w-full bg-gray-100 rounded-lg border-transparent focus:border-gray-500 focus:bg-white focus:ring-0'
+            }
+        }) }}
+
+        {{ form_row(registrationForm.plainPassword, {
+            'label': 'Password',
+            'attr': {
+                'class': 'block w-full bg-gray-100 rounded-lg border-transparent focus:border-gray-500 focus:bg-white focus:ring-0'
+            }
+        }) }}
+
+        <div class="flex items-center">
+            {{ form_row(registrationForm.agreeTerms, {
+                'label_attr': {
+                    'class': 'text-sm text-gray-500 flex items-center'
+                },
+                'attr': {
+                    'class': 'h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded'
+                }
+            }) }}
+            <label for="{{ registrationForm.agreeTerms.vars.id }}" class="ml-2 block text-sm text-gray-700">
+                I agree to the terms and conditions
+            </label>
+        </div>
+        <button type="submit" class="block w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50">
+            Register
+        </button>
+    </div>
     {{ form_end(registrationForm) }}
 
+    <div class="flex justify-between items-center bg-gray-100 py-4 px-6 rounded-b-lg">
+    <a href="{{ path('app_quack_index') }}" class="block w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50 text-center">Back to list</a>
 {% endblock %}
