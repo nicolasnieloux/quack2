@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 //#[Route('/quack')]
 class QuackController extends AbstractController
@@ -51,6 +52,8 @@ class QuackController extends AbstractController
     public function show(Quack $quack): Response
     {
         $user= $this->getUser();
+
+
         return $this->render('quack/show.html.twig', [
             'quack' => $quack,
             'user' => $user,
@@ -60,6 +63,9 @@ class QuackController extends AbstractController
     #[Route('/quack/{id}/edit', name: 'app_quack_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Quack $quack, QuackRepository $quackRepository): Response
     {
+        if ($this->getUser() !== $quack->getDuck()) {
+            throw new AccessDeniedException('Tu fais quoi là!!!');
+        }
         $form = $this->createForm(QuackType::class, $quack);
         $form->handleRequest($request);
 
@@ -78,6 +84,9 @@ class QuackController extends AbstractController
     #[Route('/quack/{id}', name: 'app_quack_delete', methods: ['POST'])]
     public function delete(Request $request, Quack $quack, QuackRepository $quackRepository): Response
     {
+        if ($this->getUser() !== $quack->getDuck()) {
+            throw new AccessDeniedException('Tu fais quoi là!!!');
+        }
         if ($this->isCsrfTokenValid('delete' . $quack->getId(), $request->request->get('_token'))) {
             $quackRepository->remove($quack, true);
         }
