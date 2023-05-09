@@ -24,12 +24,18 @@ class QuackController extends AbstractController
     #[Route('/quack/new', name: 'app_quack_new', methods: ['GET', 'POST'])]
     public function new(Request $request, QuackRepository $quackRepository): Response
     {
+        $user= $this->getUser();
+
         $quack = new Quack();
+        $quack->setDuck($user);
+
         $form = $this->createForm(QuackType::class, $quack);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $quackRepository->save($quack, true);
+
 
             return $this->redirectToRoute('app_quack_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -37,14 +43,17 @@ class QuackController extends AbstractController
         return $this->render('quack/new.html.twig', [
             'quack' => $quack,
             'form' => $form,
+            'user' => $user,
         ]);
     }
 
     #[Route('/quack/{id}', name: 'app_quack_show', methods: ['GET'])]
     public function show(Quack $quack): Response
     {
+        $user= $this->getUser();
         return $this->render('quack/show.html.twig', [
             'quack' => $quack,
+            'user' => $user,
         ]);
     }
 

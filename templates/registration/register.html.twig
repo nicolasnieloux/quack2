@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}#}
 
 {% block title %}Register{% endblock %}
 
@@ -15,6 +15,7 @@
     }) }}
     {{ form_row(registrationForm.agreeTerms) }}
 
-    <button type="submit" class="btn">Register</button>
+    <button type="submit" class="btn ">Register</button>
     {{ form_end(registrationForm) }}
+
 {% endblock %}

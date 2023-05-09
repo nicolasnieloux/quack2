@@ -4,7 +4,11 @@
 
 {% block body %}
     <h1>Quack index</h1>
-
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.userIdentifier }}
+        </div>
+    {% endif %}
     <table class="table">
         <thead>
             <tr>
@@ -21,11 +25,14 @@
                 <td>{{ quack.content }}</td>
                 <td>{{ quack.createdAt ? quack.createdAt|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a class="p-2 bg-indigo-400 rounded-full" href="{{ path('app_quack_show', {'id': quack.id}) }}"><button> Voir le quack </button></a>
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a class="p-2 bg-indigo-300 rounded-full" href="{{ path('app_quack_show', {'id': quack.id}) }}"><button> Voir le quack </button></a>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY')  %}
+                        {% if app.user.userIdentifier == quack.duck.duckname %}
                     <a href="{{ path('app_quack_edit', {'id': quack.id}) }}"><button>Modifier</button></a>
+                        {% endif %}
                     {% endif %}
                 </td>
+
             </tr>
         {% else %}
             <tr>
@@ -34,12 +41,12 @@
         {% endfor %}
         </tbody>
     </table>
-{{ dump (quacks) }}
+
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-    <a href="{{ path('app_quack_new') }}"><button>Créer un Quack</button></a>
+    <a class="p-2 bg-indigo-400 rounded-full" href="{{ path('app_quack_new') }}"><button>Créer un Quack</button></a>
         <a href="{{ path('app_logout') }}"><button>Logout</button></a>
     {% else %}
-    <a href="{{ path('app_register') }}"><button>Créer un compte</button></a>
-    <a href="{{ path('app_login') }}"><button>Se logger</button></a>
+    <a class="p-2 bg-indigo-400 rounded-full" href="{{ path('app_register') }}"><button>Créer un compte</button></a>
+    <a class="p-2 bg-indigo-400 rounded-full" href="{{ path('app_login') }}"><button>Se logger</button></a>
     {% endif %}
 {% endblock %}

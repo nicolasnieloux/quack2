@@ -3,6 +3,10 @@
 {% block title %}Duck{% endblock %}
 
 {% block body %}
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.userIdentifier }}</div>
+    {% endif %}
     <h1>Votre Duck</h1>
 
     <table class="table">
