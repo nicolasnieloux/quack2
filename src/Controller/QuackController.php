@@ -20,7 +20,9 @@ class QuackController extends AbstractController
 
         return $this->render('quack/index.html.twig', [
             'comments' =>$quackRepository->findAllComment(),
-            'quacks' =>$quackRepository->findBy(['parent'=>0]),
+            'quacks' =>$quackRepository->findBy(
+                ['parent'=>0],
+                ['created_at'=>'DESC']),
         ]);
     }
 

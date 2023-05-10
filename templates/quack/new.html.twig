@@ -3,12 +3,10 @@
 {% block title %}New Quack{% endblock %}
 
 {% block body %}
-    <h1>Create new Quack</h1>
+    <h1>Create new Quack or Comment</h1>
     {% if app.user %}
         <div class="mb-3">
             You are logged in as {{ app.user.userIdentifier }}
-
-            {{ dump(user) }}
         </div>
     {% endif %}
 
