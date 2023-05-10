@@ -39,6 +39,21 @@ class QuackRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function findAllComment():array
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT p
+            FROM App\Entity\Quack p
+            WHERE p.parent > 0'
+
+        );
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+
 //    /**
 //     * @return Quack[] Returns an array of Quack objects
 //     */

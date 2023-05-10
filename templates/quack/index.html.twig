@@ -20,10 +20,23 @@
     </tr>
     </thead>
     <tbody class="bg-white divide-y divide-gray-200">
+
+{{ dump(comments) }}
     {% for quack in quacks %}
+
         <tr>
             <td class="px-4 py-2">{{quack.duck.duckname }}</td>
-            <td class="px-4 py-2">{{ quack.content }}</td>
+            <td class="px-4 py-2">{{ quack.content }}
+            <br>
+                {% for comment in comments %}
+                {% if comment.parent == quack.id %}
+                    Commentaire: {{ comment.content }}
+                    <br>
+                    De: {{ comment.duck.duckname }}
+                    <br>
+                            {% endif %}
+                {% endfor %}
+            </td>
             <td class="px-4 py-2">{{ quack.createdAt ? quack.createdAt|date('Y-m-d') : '' }}</td>
             <td class="px-4 py-2">
                 <a class="px-3 py-1 rounded-full text-white bg-blue-500 hover:bg-blue-600" href="{{ path('app_quack_show', {'id': quack.id}) }}">Voir le quack</a>
@@ -31,13 +44,16 @@
                     {% if app.user.userIdentifier == quack.duck.duckname %}
                         <a class="px-3 py-1 rounded-full text-white bg-green-500 hover:bg-green-600" href="{{ path('app_quack_edit', {'id': quack.id}) }}">Modifier</a>
                     {% endif %}
+                    <a class="px-3 py-1 rounded-full text-white bg-yellow-500 hover:bg-green-600" href="{{ path('app_quack_new_comment', {'id': quack.id}) }}">Commenter</a>
                 {% endif %}
+
             </td>
         </tr>
     {% else %}
         <tr>
             <td class="px-4 py-2 text-center" colspan="4">No records found</td>
         </tr>
+
     {% endfor %}
     </tbody>
 </table>

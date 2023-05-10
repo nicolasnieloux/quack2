@@ -17,8 +17,10 @@ class QuackController extends AbstractController
     #[Route('/', name: 'app_quack_index', methods: ['GET', 'POST'])]
     public function index(QuackRepository $quackRepository): Response
     {
+
         return $this->render('quack/index.html.twig', [
-            'quacks' => $quackRepository->findAll(),
+            'comments' =>$quackRepository->findAllComment(),
+            'quacks' =>$quackRepository->findBy(['parent'=>0]),
         ]);
     }
 
@@ -28,6 +30,7 @@ class QuackController extends AbstractController
         $user= $this->getUser();
 
         $quack = new Quack();
+        $quack->setCreatedAt(new \DateTime());
         $quack->setDuck($user);
 
         $form = $this->createForm(QuackType::class, $quack);
@@ -67,9 +70,11 @@ class QuackController extends AbstractController
             throw new AccessDeniedException('Tu fais quoi là!!!');
         }
         $form = $this->createForm(QuackType::class, $quack);
+        $quack->setCreatedAt(new \DateTime());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $quackRepository->save($quack, true);
 
             return $this->redirectToRoute('app_quack_index', [], Response::HTTP_SEE_OTHER);
@@ -93,4 +98,36 @@ class QuackController extends AbstractController
 
         return $this->redirectToRoute('app_quack_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+    #[Route('/quack/{id}/comment', name: 'app_quack_new_comment', methods: ['GET', 'POST'])]
+    public function newComment(Request $request, QuackRepository $quackRepository, Quack $parent_quack): Response
+    {
+        $user= $this->getUser();
+        $parent_id=$parent_quack->getId();
+
+        $comment = new Quack();
+        $comment->setCreatedAt(new \DateTime());
+        $comment->setDuck($user);
+        $comment->setParent($parent_id);
+
+
+        $form = $this->createForm(QuackType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $quackRepository->save($comment, true);
+
+
+            return $this->redirectToRoute('app_quack_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('quack/new.html.twig', [
+            'comment' => $comment,
+            'form' => $form,
+            'user' => $user,
+        ]);
+    }
+
 }
