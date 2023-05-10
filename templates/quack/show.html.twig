@@ -21,7 +21,14 @@
             </tr>
         </tbody>
     </table>
-
+    {% for comment in comments %}
+        {% if comment.parent == quack.id %}
+            Commentaire: {{ comment.content }}
+            <br>
+            De: {{ comment.duck.duckname }}
+            <br>
+        {% endif %}
+    {% endfor %}
     <a href="{{ path('app_quack_index') }}"><button>Retour</button></a>
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
     <a href="{{ path('app_quack_edit', {'id': quack.id}) }}"><button>Edit</button></a>

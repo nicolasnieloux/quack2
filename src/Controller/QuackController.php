@@ -32,6 +32,7 @@ class QuackController extends AbstractController
         $quack = new Quack();
         $quack->setCreatedAt(new \DateTime());
         $quack->setDuck($user);
+        $quack->setParent(0);
 
         $form = $this->createForm(QuackType::class, $quack);
         $form->handleRequest($request);
@@ -52,12 +53,13 @@ class QuackController extends AbstractController
     }
 
     #[Route('/quack/{id}', name: 'app_quack_show', methods: ['GET'])]
-    public function show(Quack $quack): Response
+    public function show(Quack $quack, QuackRepository $quackRepository): Response
     {
         $user= $this->getUser();
 
 
         return $this->render('quack/show.html.twig', [
+            'comments' =>$quackRepository->findAllComment(),
             'quack' => $quack,
             'user' => $user,
         ]);
@@ -104,6 +106,7 @@ class QuackController extends AbstractController
     public function newComment(Request $request, QuackRepository $quackRepository, Quack $parent_quack): Response
     {
         $user= $this->getUser();
+
         $parent_id=$parent_quack->getId();
 
         $comment = new Quack();
