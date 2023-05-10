@@ -3,61 +3,58 @@
 {% block title %}Quack index{% endblock %}
 
 {% block body %}
-{% include 'header.html.twig' %}
-<h1 class="text-3xl font-bold mb-4">Quack index</h1>
-{% if app.user %}
-    <div class="mb-4">
-        <span class="text-gray-500">You are logged in as</span>
-        <span class="text-blue-500">{{ app.user.userIdentifier }}</span>
-    </div>
-{% endif %}
-<table class="min-w-full">
-    <thead>
-    <tr class="border-b border-gray-200">
-        <th class="px-4 py-2 text-left text-sm font-medium text-gray-600 uppercase tracking-wider">Duckname</th>
-        <th class="px-4 py-2 text-left text-sm font-medium text-gray-600 uppercase tracking-wider">Content</th>
-        <th class="px-4 py-2 text-left text-sm font-medium text-gray-600 uppercase tracking-wider">Created at</th>
-        <th class="px-4 py-2 text-left text-sm font-medium text-gray-600 uppercase tracking-wider">Actions</th>
-    </tr>
-    </thead>
-    <tbody class="bg-white divide-y divide-gray-200">
+    {% include 'header.html.twig' %}
 
-    {% for quack in quacks %}
+    <div class="">
+        <h1 class="text-white flex justify-center text-3xl font-bold mb-4">Tous les Quacks</h1>
 
-        <tr>
-            <td class="px-4 py-2">{{quack.duck.duckname }}</td>
-            <td class="px-4 py-2">{{ quack.content }}
-            <br>
-                {% if is_granted('IS_AUTHENTICATED_FULLY')  %}
-                {% for comment in comments %}
-                {% if comment.parent == quack.id %}
-                    Commentaire: {{ comment.content }}
-                    <br>
-                    De: {{ comment.duck.duckname }}
-                    <br>
-                            {% endif %}
+        <div class="flex justify-center">
+            <div>
+                {% for quack in quacks %}
+
+                    <div class="p-5 box-border bg-white rounded-lg m-3">
+
+                        <div class="flex justify-center box-content ">
+                            <div class="text-black px-4 py-2">{{ quack.duck.duckname }}</div>
+                            <div class="text-black px-4 py-2">{{ quack.content }}
+                                <br>
+                                <div>
+                                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                        {% for comment in comments %}
+                                            {% if comment.parent == quack.id %}
+                                                Commentaire: {{ comment.content }}
+                                                <br>
+                                                De: {{ comment.duck.duckname }}
+                                                <br>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="text-black px-4 py-2">{{ quack.createdAt ? quack.createdAt|date('Y-m-d') : '' }}</div>
+                        </div>
+                        <div>
+                            <div class="text-black px-4 py-2 flex justify-center box-content bg-white">
+                                <a class="m-2 px-3 py-1 rounded-full text-white bg-sky-400 hover:bg-sky-300 font-bold"
+                                   href="{{ path('app_quack_show', {'id': quack.id}) }}">Voir le quack</a>
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    {% if app.user.userIdentifier == quack.duck.duckname %}
+                                        <a class="m-2 px-3 py-1 rounded-full text-white bg-green-400 hover:bg-green-300 font-bold"
+                                           href="{{ path('app_quack_edit', {'id': quack.id}) }}">Modifier</a>
+                                    {% endif %}
+                                    <a class="m-2 px-3 py-1 rounded-full text-white bg-yellow-400 hover:bg-yellow-300 font-bold"
+                                       href="{{ path('app_quack_new_comment', {'id': quack.id}) }}">Commenter</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div>
+                        <div class="px-4 py-2 text-center" colspan="4">No records found</div>
+                    </div>
+
                 {% endfor %}
-                {% endif %}
-            </td>
-            <td class="px-4 py-2">{{ quack.createdAt ? quack.createdAt|date('Y-m-d') : '' }}</td>
-            <td class="px-4 py-2">
-                <a class="px-3 py-1 rounded-full text-white bg-blue-500 hover:bg-blue-600" href="{{ path('app_quack_show', {'id': quack.id}) }}">Voir le quack</a>
-                {% if is_granted('IS_AUTHENTICATED_FULLY')  %}
-                    {% if app.user.userIdentifier == quack.duck.duckname %}
-                        <a class="px-3 py-1 rounded-full text-white bg-green-500 hover:bg-green-600" href="{{ path('app_quack_edit', {'id': quack.id}) }}">Modifier</a>
-                    {% endif %}
-                    <a class="px-3 py-1 rounded-full text-white bg-yellow-500 hover:bg-green-600" href="{{ path('app_quack_new_comment', {'id': quack.id}) }}">Commenter</a>
-                {% endif %}
-
-            </td>
-        </tr>
-    {% else %}
-        <tr>
-            <td class="px-4 py-2 text-center" colspan="4">No records found</td>
-        </tr>
-
-    {% endfor %}
-    </tbody>
-</table>
-
+            </div>
+        </div>
+    </div>
 {% endblock %}

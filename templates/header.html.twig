@@ -1,7 +1,9 @@
 <header class="flex items-center justify-between bg-blue-500 p-4">
     <div class="flex items-center">
         <img src="{{ asset('picture/canard_profile.png') }}" alt="Duck Logo" class="w-8 h-8 mr-2">
-        <h1 class="text-white text-2xl font-bold">Duck Login</h1>
+        {% if app.user %}
+        <h1 class="text-white text-2xl font-bold">{{ app.user.userIdentifier }}</h1>
+        {% endif %}
     </div>
 {#    <a href="{{ path('app_quack_index') }}" class="text-white hover:text-gray-200">Back to Quack Index</a>#}
 
@@ -13,4 +15,7 @@
         <a href="{{ path('app_register') }}" class="px-3 py-2 rounded-full bg-blue-500 text-white text-sm font-bold hover:bg-blue-600">Créer un compte</a>
         <a href="{{ path('app_login') }}" class="px-3 py-2 rounded-full bg-blue-500 text-white text-sm font-bold hover:bg-blue-600">Se connecter</a>
         {% endif %}
+
 </header>
+
+

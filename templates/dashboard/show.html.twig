@@ -3,44 +3,43 @@
 {% block title %}Duck{% endblock %}
 
 {% block body %}
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}</div>
-    {% endif %}
-    <h1>Votre Duck</h1>
 
-    <table class="table">
+        {% include 'header.html.twig' %}
+
+    <h1 class="text-3xl font-bold mb-4 text-center">Votre Duck</h1>
+<div class="p-5 flex justify-center items-center ">
+    <table class="table text-center  ">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ duck.id }}</td>
-            </tr>
-            <tr>
-                <th>Duckname</th>
-                <td>{{ duck.duckname }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ duck.roles ? duck.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ duck.firstname }}</td>
-            </tr>
-            <tr>
-                <th>Lastname</th>
-                <td>{{ duck.lastname }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ duck.email }}</td>
-            </tr>
+        <tr>
+            <th class="px-4 py-2 bg-gray-200">Id</th>
+            <td class="px-4 py-2">{{ duck.id }}</td>
+        </tr>
+        <tr>
+            <th class="px-4 py-2 bg-gray-200">Duckname</th>
+            <td class="px-4 py-2">{{ duck.duckname }}</td>
+        </tr>
+        <tr>
+            <th class="px-4 py-2 bg-gray-200">Roles</th>
+            <td class="px-4 py-2">{{ duck.roles ? duck.roles|json_encode : '' }}</td>
+        </tr>
+        <tr>
+            <th class="px-4 py-2 bg-gray-200">Firstname</th>
+            <td class="px-4 py-2">{{ duck.firstname }}</td>
+        </tr>
+        <tr>
+            <th class="px-4 py-2 bg-gray-200">Lastname</th>
+            <td class="px-4 py-2">{{ duck.lastname }}</td>
+        </tr>
+        <tr>
+            <th class="px-4 py-2 bg-gray-200">Email</th>
+            <td class="px-4 py-2">{{ duck.email }}</td>
+        </tr>
         </tbody>
     </table>
-
-{#    <a href="{{ path('app_dash_board_bis_index') }}">back to list</a>#}
-
-    <a href="{{ path('app_dashboard_edit', {'id': duck.id}) }}"><button>edit</button></a>
-    <a href="{{ path('app_quack_index') }}"><button>Voir tous les quacks</button></a>
-    <a href="{{ path('app_logout') }}"><button>Logout</button></a>
+</div>
+    <div class="mt-4 text-center">
+        <a class="px-3 py-1 rounded-full text-white bg-blue-400 hover:bg-blue-500" href="{{ path('app_dashboard_edit', {'id': duck.id}) }}">Edit</a>
+        <a class="px-3 py-1 rounded-full text-white bg-blue-400 hover:bg-blue-500" href="{{ path('app_quack_index') }}">Voir tous les quacks</a>
+        <a class="px-3 py-1 rounded-full text-white bg-blue-400 hover:bg-blue-500" href="{{ path('app_logout') }}">Logout</a>
+    </div>
 {% endblock %}

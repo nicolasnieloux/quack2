@@ -3,38 +3,41 @@
 {% block title %}Quack{% endblock %}
 
 {% block body %}
-    <h1>Quack</h1>
+    <h1 class="text-3xl font-bold mb-4 text-white text-center">Quack</h1>
 
-    <table class="table">
+    <table class="table mx-auto bg-white rounded-lg">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ quack.id }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ quack.content }}</td>
-            </tr>
-            <tr>
-                <th>Created_at</th>
-                <td>{{ quack.createdAt ? quack.createdAt|date('Y-m-d') : '' }}</td>
-            </tr>
+        <tr>
+            <th class="px-4 py-2">Id</th>
+            <td class="px-4 py-2">{{ quack.id }}</td>
+        </tr>
+        <tr>
+            <th class="px-4 py-2">Content</th>
+            <td class="px-4 py-2">{{ quack.content }}</td>
+        </tr>
+        <tr>
+            <th class="px-4 py-2">Created_at</th>
+            <td class="px-4 py-2">{{ quack.createdAt ? quack.createdAt|date('Y-m-d') : '' }}</td>
+        </tr>
         </tbody>
     </table>
-    {% if is_granted('IS_AUTHENTICATED_FULLY')  %}
-    {% for comment in comments %}
-        {% if comment.parent == quack.id %}
-            Commentaire: {{ comment.content }}
-            <br>
-            De: {{ comment.duck.duckname }}
-            <br>
-        {% endif %}
-    {% endfor %}
-    {% endif %}
-    <a href="{{ path('app_quack_index') }}"><button>Retour</button></a>
+<div class=" flex justify-center bg-white rounded-lg">
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-    <a href="{{ path('app_quack_edit', {'id': quack.id}) }}"><button>Edit</button></a>
+        {% for comment in comments %}
+            {% if comment.parent == quack.id %}
+                <p class="text-base">Commentaire: {{ comment.content }}</p>
+                <p class="text-base">De: {{ comment.duck.duckname }}</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</div>
+    <div class="flex justify-center">
+    <a href="{{ path('app_quack_index') }}" class="px-3 py-2 mt-4 rounded-md bg-blue-500 text-white hover:bg-blue-600">Retour</a>
 
-    {{ include('quack/_delete_form.html.twig') }}
-    {%  endif %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <a href="{{ path('app_quack_edit', {'id': quack.id}) }}" class="px-3 py-2 mt-4 rounded-md bg-green-500 text-white hover:bg-green-600">Edit</a>
+
+        {{ include('quack/_delete_form.html.twig') }}
+    {% endif %}
+    </div>
 {% endblock %}
