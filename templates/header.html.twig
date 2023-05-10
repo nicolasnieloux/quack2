@@ -5,17 +5,16 @@
         <h1 class="text-white text-2xl font-bold">{{ app.user.userIdentifier }}</h1>
         {% endif %}
     </div>
-{#    <a href="{{ path('app_quack_index') }}" class="text-white hover:text-gray-200">Back to Quack Index</a>#}
 
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-    <a class="inline-block px-3 py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-full mt-4" href="{{ path('app_quack_new') }}">Créer un Quack</a>
+    <a class="inline-block px-3 py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-full mt-4 text-2xl" href="{{ path('app_quack_new') }}">Créer un Quack</a>
     <a class="inline-block px-3 py-2 text-white bg-red-500 hover:bg-red-600 rounded-full mt-4" href="{{ path('app_logout') }}">Logout</a>
     {% else %}
     <div class="py-4 flex justify-between items-center">
         <a href="{{ path('app_register') }}" class="px-3 py-2 rounded-full bg-blue-500 text-white text-sm font-bold hover:bg-blue-600">Créer un compte</a>
         <a href="{{ path('app_login') }}" class="px-3 py-2 rounded-full bg-blue-500 text-white text-sm font-bold hover:bg-blue-600">Se connecter</a>
         {% endif %}
-
+    </div>
 </header>
 
 

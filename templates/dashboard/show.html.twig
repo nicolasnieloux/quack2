@@ -6,40 +6,39 @@
 
         {% include 'header.html.twig' %}
 
-    <h1 class="text-3xl font-bold mb-4 text-center">Votre Duck</h1>
+    <h1 class="text-3xl text-white font-bold mb-4 text-center">Votre Duck</h1>
 <div class="p-5 flex justify-center items-center ">
-    <table class="table text-center  ">
-        <tbody>
-        <tr>
-            <th class="px-4 py-2 bg-gray-200">Id</th>
-            <td class="px-4 py-2">{{ duck.id }}</td>
-        </tr>
-        <tr>
-            <th class="px-4 py-2 bg-gray-200">Duckname</th>
-            <td class="px-4 py-2">{{ duck.duckname }}</td>
-        </tr>
-        <tr>
-            <th class="px-4 py-2 bg-gray-200">Roles</th>
-            <td class="px-4 py-2">{{ duck.roles ? duck.roles|json_encode : '' }}</td>
-        </tr>
-        <tr>
-            <th class="px-4 py-2 bg-gray-200">Firstname</th>
-            <td class="px-4 py-2">{{ duck.firstname }}</td>
-        </tr>
-        <tr>
-            <th class="px-4 py-2 bg-gray-200">Lastname</th>
-            <td class="px-4 py-2">{{ duck.lastname }}</td>
-        </tr>
-        <tr>
-            <th class="px-4 py-2 bg-gray-200">Email</th>
-            <td class="px-4 py-2">{{ duck.email }}</td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="table text-center text-white ">
+        <div>
+        <div>
+            <div class="px-4 py-2 ">Id</div>
+            <div class="px-4 py-2">{{ duck.id }}</div>
+        </div>
+        <div>
+            <div class="px-4 py-2 ">Duckname</div>
+            <div class="px-4 py-2">{{ duck.duckname }}</div>
+        </div>
+        <div>
+            <div class="px-4 py-2 ">Roles</div>
+            <div class="px-4 py-2">{{ duck.roles ? duck.roles|json_encode : '' }}</div>
+        </div>
+        <div>
+            <div class="px-4 py-2 ">Firstname</div>
+            <div class="px-4 py-2">{{ duck.firstname }}</div>
+        </div>
+        <div>
+            <div class="px-4 py-2 ">Lastname</div>
+            <div class="px-4 py-2">{{ duck.lastname }}</div>
+        </div>
+        <div>
+            <div class="px-4 py-2 ">Email</div>
+            <div class="px-4 py-2">{{ duck.email }}</div>
+        </div>
+        </div>
+    </div>
 </div>
     <div class="mt-4 text-center">
         <a class="px-3 py-1 rounded-full text-white bg-blue-400 hover:bg-blue-500" href="{{ path('app_dashboard_edit', {'id': duck.id}) }}">Edit</a>
         <a class="px-3 py-1 rounded-full text-white bg-blue-400 hover:bg-blue-500" href="{{ path('app_quack_index') }}">Voir tous les quacks</a>
-        <a class="px-3 py-1 rounded-full text-white bg-blue-400 hover:bg-blue-500" href="{{ path('app_logout') }}">Logout</a>
     </div>
 {% endblock %}

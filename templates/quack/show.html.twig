@@ -3,41 +3,51 @@
 {% block title %}Quack{% endblock %}
 
 {% block body %}
+    {% include 'header.html.twig' %}
     <h1 class="text-3xl font-bold mb-4 text-white text-center">Quack</h1>
 
-    <table class="table mx-auto bg-white rounded-lg">
-        <tbody>
-        <tr>
-            <th class="px-4 py-2">Id</th>
-            <td class="px-4 py-2">{{ quack.id }}</td>
-        </tr>
-        <tr>
-            <th class="px-4 py-2">Content</th>
-            <td class="px-4 py-2">{{ quack.content }}</td>
-        </tr>
-        <tr>
-            <th class="px-4 py-2">Created_at</th>
-            <td class="px-4 py-2">{{ quack.createdAt ? quack.createdAt|date('Y-m-d') : '' }}</td>
-        </tr>
-        </tbody>
-    </table>
-<div class=" flex justify-center bg-white rounded-lg">
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        {% for comment in comments %}
-            {% if comment.parent == quack.id %}
-                <p class="text-base">Commentaire: {{ comment.content }}</p>
-                <p class="text-base">De: {{ comment.duck.duckname }}</p>
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-</div>
-    <div class="flex justify-center">
-    <a href="{{ path('app_quack_index') }}" class="px-3 py-2 mt-4 rounded-md bg-blue-500 text-white hover:bg-blue-600">Retour</a>
+    <div class=" flex justify-center">
+        <div>
+            <table class="table mx-auto bg-white rounded-lg">
+                <tbody>
+                <tr>
+                    <th class="px-4 py-2 ">Id</th>
+                    <td class="px-4 py-2">{{ quack.id }}</td>
+                </tr>
+                <tr>
+                    <th class="px-4 py-2">Content</th>
+                    <td class="px-4 py-2">{{ quack.content }}</td>
+                </tr>
+                <tr>
+                    <th class="px-4 py-2">Created_at</th>
+                    <td class="px-4 py-2">{{ quack.createdAt ? quack.createdAt|date('Y-m-d') : '' }}</td>
+                </tr>
+                </tbody>
+            </table>
 
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <a href="{{ path('app_quack_edit', {'id': quack.id}) }}" class="px-3 py-2 mt-4 rounded-md bg-green-500 text-white hover:bg-green-600">Edit</a>
+            <div class=" flex justify-center bg-white rounded-lg m-3">
+                <div>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        {% for comment in comments %}
+                            {% if comment.parent == quack.id %}
+                                <p class="p-4  text-base"><strong>De: </strong> {{ comment.duck.duckname }}</p>
+                                <p class="p-2  text-base"><strong>Commentaire: </strong>{{ comment.content }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="flex justify-center ">
+                <a href="{{ path('app_quack_index') }}"
+                   class="m-3 px-3 py-2 mt-4 rounded-md bg-blue-500 text-white hover:bg-blue-600">Retour</a>
 
-        {{ include('quack/_delete_form.html.twig') }}
-    {% endif %}
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a href="{{ path('app_quack_edit', {'id': quack.id}) }}"
+                       class="m-3 px-3 py-2 mt-4 rounded-md bg-green-500 text-white hover:bg-green-600">Edit</a>
+
+                    <div class="m-3 px-3 py-2 mt-4 rounded-md bg-red-500 text-white hover:bg-red-600">{{ include('quack/_delete_form.html.twig') }}</div>
+                {% endif %}
+            </div>
+        </div>
     </div>
 {% endblock %}

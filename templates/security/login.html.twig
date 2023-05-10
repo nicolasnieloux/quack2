@@ -3,31 +3,42 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    {% include 'header.html.twig' %}
+    <div class="f">
+        <form method="post">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            <h1 class="m-3 text-3xl font-weight-normal text-white flex justify-center">Please sign in</h1>
+
+            <div class="m-3 flex justify-center p-3 ">
+                <div>
+                    <div>
+                        <label class="text-white text-center grid grid-cols-1" for="inputDuckname">Duckname</label>
+                        <input type="text" value="{{ last_username }}" name="duckname" id="inputDuckname"
+                               class="form-control m-3 grid grid-cols-1" autocomplete="username" required autofocus>
+                    </div>
+
+                    <div>
+                        <label class="text-white text-center grid grid-cols-1" for="inputPassword">Mot de passe</label>
+                        <input type="password" name="password" id="inputPassword" class="form-control m-3 grid grid-cols-1"
+                               autocomplete="current-password" required>
+                    </div>
+                    <input type="hidden" name="_csrf_token"
+                           value="{{ csrf_token('authenticate') }}"
+                    >
+                    <div class="flex justify-center">
+                        <a class="m-2 px-3 py-1  rounded-full text-white bg-sky-400 hover:bg-sky-300 font-bold"
+                           href="{{ path('app_dashboard') }}">Sign in</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="flex justify-center">
+            <a class="p-3 py-1 bg-sky-400 hover:bg-sky-300 font-bold text-white rounded-full flex justify-center" href="{{ path('app_quack_index') }}">Back</a>
         </div>
-    {% endif %}
-
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputDuckname">Duckname</label>
-    <input type="text" value="{{ last_username }}" name="duckname" id="inputDuckname" class="form-control" autocomplete="username" required autofocus>
-    <label for="inputPassword">Mot de passe</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    <a class="p-2 bg-indigo-400 rounded-full" href="{{ path('app_dashboard') }}"><button> Sign in </button></a>
-
-</form>
-    <br>
-    <a class="p-2 bg-indigo-400 rounded-full" href="{{ path('app_quack_index') }}"><button> Back </button></a>
+    </div>
 {% endblock %}
 
