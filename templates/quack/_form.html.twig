@@ -1,4 +1,23 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+
+<div class="flex justify-center text-white">
+{{ form_start(form, {
+    'attr': {
+    'class': 'm-4 p-4',
+        }
+}) }}
+    {{ form_row(form.content, {
+        'label': 'Content',
+        'attr': {
+            'class': 'text-3xl block w-full bg-gray-100 rounded-lg border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-black',
+
+        }
+    }) }}
+{#{{ dump(field_name(form.content)) }}#}
+{#{{ dump(form.content) }}#}
+{#    {{ dump(field_value(form.content)) }}#}
+   <div class="flex justify-center">
+       <button class="m-2 px-3 py-1 rounded-full text-white bg-green-400 hover:bg-green-300 font-bold ">{{ button_label|default('Save') }}</button>
+   </div>
+       {{ form_end(form) }}
+
+</div>

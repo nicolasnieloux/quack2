@@ -1,16 +1,10 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}New Quack{% endblock %}
 
 {% block body %}
+    {%  include 'header.html.twig' %}
     <h1>Create new Quack or Comment</h1>
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}
-        </div>
-    {% endif %}
 
     {{ include('quack/_form.html.twig') }}
-
     <a href="{{ path('app_quack_index') }}">back to list</a>
 {% endblock %}

@@ -8,31 +8,31 @@
 
     <h1 class="text-3xl text-white font-bold mb-4 text-center">Votre Duck</h1>
 <div class="p-5 flex justify-center items-center ">
-    <div class="table text-center text-white ">
+    <div class=" text-center text-white ">
         <div>
-        <div>
-            <div class="px-4 py-2 ">Id</div>
-            <div class="px-4 py-2">{{ duck.id }}</div>
+        <div class="p-1 box-border bg-white rounded-lg m-2">
+            <div class="text-black px-1 py-1 ">Id</div>
+            <div class="text-black px-1 py-1">{{ duck.id }}</div>
         </div>
-        <div>
-            <div class="px-4 py-2 ">Duckname</div>
-            <div class="px-4 py-2">{{ duck.duckname }}</div>
+        <div class="p-2 box-border bg-white rounded-lg m-2">
+            <div class="text-black px-1 py-1 ">Votre Duckname</div>
+            <div class="text-black px-1 py-1">{{ duck.duckname }}</div>
         </div>
-        <div>
-            <div class="px-4 py-2 ">Roles</div>
-            <div class="px-4 py-2">{{ duck.roles ? duck.roles|json_encode : '' }}</div>
+        <div class="p-1 box-border bg-white rounded-lg m-2">
+            <div class="text-black px-1 py-1">Votre "rôle"</div>
+            <div class="text-black px-1 py-1">{{ duck.roles ? duck.roles|json_encode : '' }}</div>
         </div>
-        <div>
-            <div class="px-4 py-2 ">Firstname</div>
-            <div class="px-4 py-2">{{ duck.firstname }}</div>
+        <div class="p-1 box-border bg-white rounded-lg m-2">
+            <div class="text-black px-1 py-1">Firstname</div>
+            <div class="text-black px-1 py-1">{{ duck.firstname }}</div>
         </div>
-        <div>
-            <div class="px-4 py-2 ">Lastname</div>
-            <div class="px-4 py-2">{{ duck.lastname }}</div>
+        <div class="p-1 box-border bg-white rounded-lg m-2">
+            <div class="text-black px-1 py-1">Lastname</div>
+            <div class="text-black px-1 py-1">{{ duck.lastname }}</div>
         </div>
-        <div>
-            <div class="px-4 py-2 ">Email</div>
-            <div class="px-4 py-2">{{ duck.email }}</div>
+        <div class="p-1 box-border bg-white rounded-lg m-2">
+            <div class="text-black px-1 py-1">Email</div>
+            <div class="text-black px-1 py-1">{{ duck.email }}</div>
         </div>
         </div>
     </div>
