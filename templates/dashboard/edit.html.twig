@@ -4,7 +4,64 @@
 
 {% block body %}
     {% include 'header.html.twig' %}
-    <h1>Edit Duck</h1>
-    <div>{{ form(form) }}</div>
-    <a href="{{ path('app_dashboard') }}">back</a>
+    <div class="flex justify-center">
+    <h1 class="m-5 text-3xl text-white">Edit Duck</h1>
+    </div>
+    {#    <div>{{ form(form) }}</div> #}
+    {#    {{ form_start(form { #}
+    <div class="text-center flex justify-center">
+
+            {{ form_start(form, {
+                'attr': {
+                    'class': 'space-y-4 p-8 text-white'
+                }
+            }) }}
+
+            <div class="space-y-4">
+                {{ form_row(form.firstname, {
+                    'label': 'First Name',
+                    'attr': {
+                        'class': 'text-black block w-full bg-gray-100 rounded-lg border-transparent focus:border-gray-500 focus:bg-white focus:ring-0'
+                    }
+                }) }}
+            </div>
+            <div class="space-y-4">
+                {{ form_row(form.lastname, {
+                    'label': 'Lastname ',
+                    'attr': {
+                        'class': 'text-black block w-full bg-gray-100 rounded-lg border-transparent focus:border-gray-500 focus:bg-white focus:ring-0'
+                    }
+                }) }}
+            </div>
+            <div class="space-y-4">
+                {{ form_row(form.password, {
+                    'label': 'Password',
+                    'attr': {
+                        'class': 'text-black block w-full bg-gray-100 rounded-lg border-transparent focus:border-gray-500 focus:bg-white focus:ring-0'
+                    }
+                }) }}
+            </div>
+
+
+    <div class="space-y-4">
+        {{ form_row(form.save, {
+            'label': 'Modify',
+            'attr': {
+                'class': 'text-white block w-full bg-green-500 rounded-lg border-transparent focus:border-green-500 focus:bg-green focus:ring-0 hover:bg-green-600'
+            }
+        }) }}
+
+    </div>
+{#        <button id="form_save" name="form[save]" type="submit"#}
+{#                class="block w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50">#}
+{#            Modify#}
+{#        </button>#}
+
+        {{ form_end(form) }}
+    </div>
+
+<div class="mt-4 text-center">
+    <a href="{{ path('app_dashboard') }}"
+       class="px-3 py-1 rounded-full text-white bg-blue-400 hover:bg-blue-500">back</a>
+</div>
 {% endblock %}
