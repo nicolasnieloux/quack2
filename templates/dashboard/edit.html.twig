@@ -3,6 +3,7 @@
 {% block title %}Edit Duck{% endblock %}
 
 {% block body %}
+    {% include 'header.html.twig' %}
     <h1>Edit Duck</h1>
     <div>{{ form(form) }}</div>
     <a href="{{ path('app_dashboard') }}">back</a>
